@@ -15,13 +15,11 @@ SET PROFILING_HISTORY_SIZE = 30;
 SELECT *
 FROM gogi;
 
-
 ## 성능 측정 전체 리스트
 SHOW profiles;
 
 ## 성능 쿼리 하나 자세히 보기 (리스트에서 값을 가져와서 뒤에 넣어줘야함)
-SHOW profile CPU FOR QUERY 14;
-
+SHOW PROFILE CPU FOR QUERY 14;
 
 # 프로세스 리스트 보기 및 죽이기
 
@@ -40,3 +38,17 @@ SHOW VARIABLES LIKE '%max_connection%';
 # 현재 접속자수 Thread (Threads_connected)
 SHOW STATUS LIKE 'Treads_connected';
 
+
+
+# information_schema 데이터베이스를 사용하여서 작업하는 방법
+
+USE information_schema;
+
+# 인덱스 목록
+SELECT table_schema, table_name, index_name, non_unique, index_type, index_comment
+FROM information_schema.statistics
+WHERE table_schema = 'database_name';
+
+# 트랜잭션 목록 확인
+SELECT tx_id, user_host, db, command, time, state, info
+FROM information_schema.innodb_trx;
