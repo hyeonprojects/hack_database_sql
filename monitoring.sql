@@ -12,6 +12,7 @@ SET profiling = 1;
 SET PROFILING_HISTORY_SIZE = 30;
 
 ## 성능 측정 쿼리
+EXPLAIN
 SELECT *
 FROM gogi;
 
